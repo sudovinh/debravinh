@@ -1,39 +1,40 @@
 package main
 
 import (
+	"log"
 	"net/http"
-	"net/http/httputil"
-	"net/url"
 	"os"
 
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
+
+var redirectMap = map[string]string{
+	"/":  "https://www.zola.com/wedding/debraandvinh",
+	// Add more redirects as needed
+}
 
 func main() {
 	e := echo.New()
 
-	// Create the reverse proxy
-	proxyURL, _ := url.Parse("https://www.zola.com/wedding/debraandvinh")
-	proxy := httputil.NewSingleHostReverseProxy(proxyURL)
+	// Set up logging
+	e.Use(middleware.Logger())
+	logFile, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer logFile.Close()
+	e.Logger.SetOutput(logFile)
 
-	// Define the route to redirect
-	redirectRoute := "/wedding"
-
-	e.Any(redirectRoute, func(c echo.Context) error {
-		req := c.Request()
-		res := c.Response().Writer
-
-		req.URL = proxyURL
-
-		proxy.ServeHTTP(res, req)
-		return nil
-	})
+	// Register static file handler
+	e.Static("/assets", "web/assets")
 
 	// Add the landing page route
-	e.GET("/", func(c echo.Context) error {
+	e.GET("/bio", func(c echo.Context) error {
 		// Read the contents of the index.html file
-		html, err := ReadFile("index.html")
+		html, err := ReadFile("web/view/index.html")
 		if err != nil {
+			e.Logger.Errorf("Failed to read index.html: %s", err.Error())
 			return echo.NewHTTPError(http.StatusInternalServerError, "Internal Server Error")
 		}
 
@@ -44,6 +45,19 @@ func main() {
 		return c.HTML(http.StatusOK, html)
 	})
 
+	// Add the redirect routes
+	for path, redirectURL := range redirectMap {
+		path := path // Create a new variable to capture the loop value correctly
+		redirectURL := redirectURL // Create a new variable to capture the loop value correctly
+
+		e.GET(path, func(c echo.Context) error {
+			e.Logger.Infof("Redirecting %s to %s", path, redirectURL)
+			return c.Redirect(http.StatusTemporaryRedirect, redirectURL)
+		})
+	}
+
+	// Start the server
+	e.Logger.Infof("Server started on :8080")
 	e.Start(":8080")
 }
 

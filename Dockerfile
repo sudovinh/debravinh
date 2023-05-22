@@ -8,14 +8,16 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o proxy-server
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/debravinh
 
 FROM alpine:3.16
 
 WORKDIR /app
 
-COPY --from=builder /app/proxy-server /app/proxy-server
+COPY --from=builder /app/debravinh /app/debravinh
+COPY web /app/web
+
 
 EXPOSE 8080
 
-CMD ["/app/proxy-server"]
+CMD ["/app/debravinh"]
