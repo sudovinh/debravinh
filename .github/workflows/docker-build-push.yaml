@@ -30,3 +30,15 @@ jobs:
         run: |
           docker tag sudovinh/debravinh:$VERSION sudovinh/debravinh:$VERSION
           docker push sudovinh/debravinh:$VERSION
+
+      - name: Update Readme
+        run: |
+          sed -i "s|Latest Image Version: .*|Latest Image Version: sudovinh/debravinh:$VERSION}|" README.md
+
+      - name: Commit and Push Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md
+          git commit -m "Update README with latest version and build status"
+          git push
