@@ -1,0 +1,30 @@
+name: Docker Build PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Version
+        run: echo "VERSION=${GITHUB_SHA:0:7}-$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+
+      - name: Build Docker Image
+        run: docker build -t sudovinh:debravinh --build-arg VERSION=$VERSION .
+
+      - name: Run Docker Container
+        run: docker run -d sudovinh:debravinh
+
+      - name: Check Container Status
+        run: docker ps
+
+      - name: Clean Up
+        run: docker stop $(docker ps -q) && docker rm $(docker ps -aq)
