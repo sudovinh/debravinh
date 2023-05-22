@@ -10,7 +10,7 @@ import (
 )
 
 var redirectMap = map[string]string{
-	"/":  "https://www.zola.com/wedding/debraandvinh",
+	"/": "https://www.zola.com/wedding/debraandvinh",
 	// Add more redirects as needed
 }
 
@@ -30,9 +30,9 @@ func main() {
 	e.Static("/assets", "web/assets")
 
 	// Add the landing page route
-	e.GET("/bio", func(c echo.Context) error {
+	e.GET("/dv", func(c echo.Context) error {
 		// Read the contents of the index.html file
-		html, err := ReadFile("web/view/index.html")
+		html, err := ReadFile("web/views/index.html")
 		if err != nil {
 			e.Logger.Errorf("Failed to read index.html: %s", err.Error())
 			return echo.NewHTTPError(http.StatusInternalServerError, "Internal Server Error")
@@ -54,6 +54,19 @@ func main() {
 			e.Logger.Infof("Redirecting %s to %s", path, redirectURL)
 			return c.Redirect(http.StatusTemporaryRedirect, redirectURL)
 		})
+	}
+
+	// Redirect 404 errors to "/dv"
+	e.HTTPErrorHandler = func(err error, c echo.Context) {
+		code := http.StatusInternalServerError
+		if he, ok := err.(*echo.HTTPError); ok {
+			code = he.Code
+		}
+		if code == http.StatusNotFound {
+			c.Redirect(http.StatusTemporaryRedirect, "/dv")
+			return
+		}
+		e.DefaultHTTPErrorHandler(err, c)
 	}
 
 	// Start the server
