@@ -41,8 +41,4 @@ jobs:
           git config --local user.name "svc-sudovinh-cicd"
           git add README.md
           git commit -m "Update README with latest version and build status"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          branch: ${{ github.ref }}
+          git push
