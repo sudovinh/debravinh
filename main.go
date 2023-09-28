@@ -10,7 +10,7 @@ import (
 )
 
 var redirectMap = map[string]string{
-	"/": "https://www.zola.com/wedding/debraandvinh",
+	"/wedding": "https://www.zola.com/wedding/debraandvinh",
 	// Add more redirects as needed
 }
 
@@ -30,7 +30,7 @@ func main() {
 	e.Static("/assets", "web/assets")
 
 	// Add the landing page route
-	e.GET("/dv", func(c echo.Context) error {
+	e.GET("/", func(c echo.Context) error {
 		// Read the contents of the index.html file
 		html, err := ReadFile("web/views/index.html")
 		if err != nil {
@@ -47,7 +47,7 @@ func main() {
 
 	// Add the redirect routes
 	for path, redirectURL := range redirectMap {
-		path := path // Create a new variable to capture the loop value correctly
+		path := path               // Create a new variable to capture the loop value correctly
 		redirectURL := redirectURL // Create a new variable to capture the loop value correctly
 
 		e.GET(path, func(c echo.Context) error {
@@ -63,7 +63,7 @@ func main() {
 			code = he.Code
 		}
 		if code == http.StatusNotFound {
-			c.Redirect(http.StatusTemporaryRedirect, "/dv")
+			c.Redirect(http.StatusTemporaryRedirect, "/")
 			return
 		}
 		e.DefaultHTTPErrorHandler(err, c)

@@ -13,3 +13,12 @@ Types of changes
 `Fixed` for any bug fixes.
 `Security` in case of vulnerabilities.
 
+
+## [2023-09-27]
+
+### Changed
+- add .gitignore
+- switch root path with /dv
+
+### Added
+- add new path /wedding to redirect to zola wedding website
