@@ -33,7 +33,7 @@ jobs:
 
       - name: Update Readme
         run: |
-          sed -i "s|Latest Image Version: .*|Latest Image Version: sudovinh/debravinh:$VERSION}|" README.md
+          sed -i "s|Latest Image Version: .*|Latest Image Version: sudovinh/debravinh:$VERSION|" README.md
 
       - name: Commit and Push Changes
         env:
