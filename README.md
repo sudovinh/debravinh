@@ -2,7 +2,7 @@
 
 [![Docker Build and Push Status](https://github.com/sudovinh/debravinh/actions/workflows/docker-build-push.yaml/badge.svg?branch=main)](https://github.com/sudovinh/debravinh/actions/workflows/docker-build-push.yaml)
 
-Latest Image Version: sudovinh/debravinh:9c0fd11-20240212005808
+Latest Image Version: sudovinh/debravinh:401d540-20240212025338
 
 Repo for creating new images for debravinh.com
 
