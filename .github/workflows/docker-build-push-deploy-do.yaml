@@ -57,7 +57,7 @@ jobs:
                 "name": "sudovinh-debravinh",
                  "image":{
                   "registry_type": "DOCKER_HUB",
-                  "registry": "sudovinh"
+                  "registry": "sudovinh",
                   "repository": "debravinh",
                   "tag": "$VERSION"
                 }
