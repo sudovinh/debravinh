@@ -48,7 +48,7 @@ jobs:
           git push
 
       - name: Rebuild and Deploy DigitalOcean App
-        uses: digitalocean/app_action@v1.1.5
+        uses: digitalocean/app_action@v1.1.6
         with:
           app_name: debravinh-com
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
