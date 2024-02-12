@@ -50,15 +50,14 @@ jobs:
       - name: Rebuild an Deploy DigitalOcean App
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: sudovinh-debravinh
+          app_name: debravinh-com
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           images: '[
               {
                 "name": "sudovinh-debravinh",
                  "image":{
                   "registry_type": "DOCKER_HUB",
-                  "registry": "sudovinh",
-                  "repository": "debravinh",
+                  "repository": "sudovinh/debravinh",
                   "tag": "$VERSION"
                 }
               }
