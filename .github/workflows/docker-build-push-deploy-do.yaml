@@ -50,7 +50,7 @@ jobs:
       - name: Rebuild an Deploy DigitalOcean App
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: debravinh-com
+          app_name: sudovinh-debravinh
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           images: '[
               {
