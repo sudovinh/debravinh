@@ -52,14 +52,3 @@ jobs:
         with:
           app_name: debravinh-com
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-          images: '[
-              {
-                "name": "sudovinh-debravinh",
-                 "image":{
-                  "registry": "sudovinh",
-                  "registry_type": "DOCKER_HUB",
-                  "repository": "debravinh",
-                  "tag": "$VERSION"
-                }
-              }
-            ]'
