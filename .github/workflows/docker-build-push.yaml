@@ -46,3 +46,9 @@ jobs:
           git add README.md
           git commit -m "Update README with latest version and build status"
           git push
+
+      - name: Rebuild an Deply DigitalOcean App
+        uses: digitalocean/app_action@v1.1.5
+        with:
+          app_name: debravinh-com
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
