@@ -29,7 +29,9 @@ jobs:
       - name: Tag and Push Docker Image
         run: |
           docker tag sudovinh/debravinh:$VERSION sudovinh/debravinh:$VERSION
+          docker tag sudovinh/debravinh:$VERSION sudovinh/debravinh:latest
           docker push sudovinh/debravinh:$VERSION
+          docker push sudovinh/debravinh:latest
 
       - name: Update Readme
         run: |
