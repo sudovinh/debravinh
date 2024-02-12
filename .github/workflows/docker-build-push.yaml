@@ -54,7 +54,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           images: '[
               {
-                "name": "debravinh-com",
+                "name": "sudovinh-debravinh",
                  "image":{
                   "registry_type": "DOCKER_HUB",
                   "registry": "ndebravinh",
