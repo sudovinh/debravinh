@@ -1,4 +1,4 @@
-name: Docker Build and Push
+name: Docker Build and Push and Deploy to DO
 
 on:
   push:
@@ -47,17 +47,16 @@ jobs:
           git commit -m "Update README with latest version and build status"
           git push
 
-      - name: Rebuild an Deply DigitalOcean App
+      - name: Rebuild an Deploy DigitalOcean App
         uses: digitalocean/app_action@v1.1.5
         with:
           app_name: debravinh-com
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           images: '[
               {
-                "name": "sudovinh-debravinh",
+                "name": "debravinh",
                  "image":{
                   "registry_type": "DOCKER_HUB",
-                  "registry": "debravinh",
                   "repository": "sudovinh",
                   "tag": "$VERSION"
                 }
