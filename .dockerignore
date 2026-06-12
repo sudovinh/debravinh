@@ -1,0 +1,12 @@
+.git
+.github
+.flox
+.do
+terraform
+bin
+*.log
+*.md
+changlog.yml
+Makefile
+.gitignore
+.dockerignore

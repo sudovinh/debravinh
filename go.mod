@@ -1,6 +1,8 @@
 module sudovinh/debravinh
 
-go 1.24
+go 1.26
+
+toolchain go1.26.4
 
 require github.com/labstack/echo/v4 v4.13.4
 
