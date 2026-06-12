@@ -223,6 +223,63 @@ a:focus-visible {
 
 .about section {
   margin-top: 1.75rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+
+.section-photo {
+  width: 136px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lift);
+  flex-shrink: 0;
+}
+
+.section-photo.focus-top {
+  object-position: 50% 22%;
+}
+
+.section-body {
+  flex: 1;
+}
+
+@media (max-width: 540px) {
+  .about section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .section-photo {
+    width: 100%;
+    aspect-ratio: 5 / 3;
+  }
+}
+
+.video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+  color: var(--color-accent);
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1px;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.video-link svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.video-link:hover,
+.video-link:focus-visible {
+  color: var(--color-accent-ice);
+  border-color: var(--color-accent);
 }
 
 .about h2 {
