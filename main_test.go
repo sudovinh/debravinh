@@ -21,7 +21,7 @@ func TestRoutes(t *testing.T) {
 	}{
 		{name: "home page", path: "/", wantStatus: http.StatusOK, wantBody: "Debra"},
 		{name: "about us page", path: "/aboutus", wantStatus: http.StatusOK, wantBody: "Debra"},
-		{name: "wedding redirect", path: "/wedding", wantStatus: http.StatusTemporaryRedirect, wantLocation: "https://www.zola.com/wedding/debraandvinh"},
+		{name: "old wedding path redirects home", path: "/wedding", wantStatus: http.StatusTemporaryRedirect, wantLocation: "/"},
 		{name: "robots.txt", path: "/robots.txt", wantStatus: http.StatusOK, wantBody: "User-agent"},
 		{name: "static asset", path: "/assets/css/style.css", wantStatus: http.StatusOK},
 		{name: "unknown path redirects home", path: "/nonexistent", wantStatus: http.StatusTemporaryRedirect, wantLocation: "/"},

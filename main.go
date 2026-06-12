@@ -18,11 +18,6 @@ import (
 //go:embed web/views web/assets web/robots.txt
 var webFS embed.FS
 
-var redirectMap = map[string]string{
-	"/wedding": "https://www.zola.com/wedding/debraandvinh",
-	// Add more redirects as needed
-}
-
 // contentSecurityPolicy allows same-origin content plus Google Fonts; the site has no JavaScript.
 const contentSecurityPolicy = "default-src 'self'; style-src 'self' fonts.googleapis.com; font-src fonts.gstatic.com; img-src 'self'; script-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
 
@@ -61,12 +56,6 @@ func newServer() *echo.Echo {
 
 	e.StaticFS("/assets", echo.MustSubFS(webFS, "web/assets"))
 	e.FileFS("/robots.txt", "web/robots.txt", webFS)
-
-	for path, redirectURL := range redirectMap {
-		e.GET(path, func(c echo.Context) error {
-			return c.Redirect(http.StatusTemporaryRedirect, redirectURL)
-		})
-	}
 
 	// Send unknown paths back to the landing page instead of a bare 404.
 	e.HTTPErrorHandler = func(err error, c echo.Context) {
