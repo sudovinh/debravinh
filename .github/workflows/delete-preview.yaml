@@ -1,0 +1,20 @@
+name: Delete PR Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  delete:
+    name: Delete preview app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete preview app
+        uses: digitalocean/app_action/delete@cc55bc9b848d25f9c1c9f831cf843fbab3fbfb15 # v2
+        with:
+          from_pr_preview: "true"
+          ignore_not_found: "true"
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}

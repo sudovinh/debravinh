@@ -1,45 +1,55 @@
 # debravinh
 
-[![Docker Build and Push Status](https://github.com/sudovinh/debravinh/actions/workflows/docker-build-push.yaml/badge.svg?branch=main)](https://github.com/sudovinh/debravinh/actions/workflows/docker-build-push.yaml)
+[![CI](https://github.com/sudovinh/debravinh/actions/workflows/ci.yaml/badge.svg?branch=main)](https://github.com/sudovinh/debravinh/actions/workflows/ci.yaml)
+[![Deploy](https://github.com/sudovinh/debravinh/actions/workflows/deploy-app.yaml/badge.svg?branch=main)](https://github.com/sudovinh/debravinh/actions/workflows/deploy-app.yaml)
 
-Latest Image Version: sudovinh/debravinh:aa79feb-20240212042631
+Source for [debravinh.com](https://debravinh.com) — a linktree-style landing page for Debra & Vinh, plus an [/aboutus](https://debravinh.com/aboutus) page with our story.
 
-Repo for creating new images for debravinh.com
+## Stack
 
-This Go web server application developed using the [Echo framework](https://echo.labstack.com/). The application serves as a redirector and landing social media page for Debra and Vinh (similar to linktree). It provides URL redirection for specific paths and displays a landing page with HTML content.
+- **Go + [Echo v4](https://echo.labstack.com/)** — single-file server, both pages and all assets are compiled in via `go:embed` (no filesystem reads at runtime)
+- **Plain HTML/CSS** — no JS frameworks, inline SVG icons, one shared stylesheet
+- **DigitalOcean App Platform** — builds from the repo `Dockerfile`, spec lives in [`.do/app.yaml`](.do/app.yaml)
+- **Terraform** — manages the DO app and the `debravinh.com` domain ([`terraform/`](terraform/))
+- **GitHub Actions** — CI, PR preview deploys, and production deploys
 
-## Features
+## Local development
 
-- URL Redirection: The server redirects specific paths to predefined URLs using a mapping defined in the `redirectMap` variable.
-- Landing Page: The server displays a landing page with HTML content when accessing the root path (`/`).
-- Static Files: Static assets such as CSS and images are served from the "web/assets" directory.
-- Logging: The server utilizes logging functionality to log requests and errors to a file.
-- Error Handling: It handles HTTP 404 errors by redirecting to the home page.
-
-## Usage
-
-1. Clone the repository:
+Tooling is managed with [Flox](https://flox.dev) (`flox activate` drops you into a shell with go, terraform, doctl, op, and gh). Or bring your own Go ≥ 1.26.
 
 ```shell
-git clone https://github.com/your-username/your-repository.git
+make run          # start the server on :8080 (PORT env var to override)
+make test         # run the test suite
+make check        # vet + test + build, run before pushing
+make vuln         # govulncheck dependency scan
+make docker-build # build the production image locally
+make docker-run   # run it on :8080
 ```
 
-2. Install the GO dependencies:
+## CI/CD
 
-```shell
-go mod download
+```
+PR opened ──> CI (vet/test/build/govulncheck + docker smoke test)
+          └─> preview app deployed on DO, URL commented on the PR
+PR closed ──> preview app deleted
+merge to main ──> deploy-app workflow ──> DigitalOcean rebuilds & deploys
 ```
 
-3. Build and run the application:
+Deploys use [`digitalocean/app_action/deploy@v2`](https://docs.digitalocean.com/products/app-platform/how-to/deploy-from-github-actions/) with the app spec from `.do/app.yaml`. There's no container registry — DigitalOcean builds the Dockerfile from source.
+
+## Security
+
+- Strict security headers (CSP, HSTS, X-Frame-Options, nosniff, referrer/permissions policy) set in middleware and asserted in tests
+- Request body limit and server timeouts
+- `govulncheck` runs in CI; GitHub Actions are SHA-pinned with least-privilege permissions
+- Container runs as `nobody` on an up-to-date Alpine base
+
+## Infrastructure
+
+The DO app (`debravinh-com`) and the `debravinh.com` domain are managed in [`terraform/`](terraform/). Secrets come from 1Password via `op run` — nothing sensitive is stored in the repo.
 
 ```shell
-go run main.go
-```
-
-4. Build and create executable (optional)
-
-```shell
-go build -o /app/debravinh
-./debravinh
-open browser and go to 0.0.0.0:8080
+make terraform-init
+make terraform-plan
+make terraform-apply
 ```

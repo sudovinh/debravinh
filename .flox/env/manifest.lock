@@ -1,0 +1,608 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "schema-version": "1.12.0",
+    "install": {
+      "_1password-cli": {
+        "pkg-path": "_1password-cli"
+      },
+      "doctl": {
+        "pkg-path": "doctl"
+      },
+      "gh": {
+        "pkg-path": "gh"
+      },
+      "go": {
+        "pkg-path": "go"
+      },
+      "terraform": {
+        "pkg-path": "terraform"
+      }
+    },
+    "hook": {},
+    "profile": {},
+    "options": {}
+  },
+  "packages": [
+    {
+      "attr_path": "_1password-cli",
+      "broken": false,
+      "derivation": "/nix/store/vjclicqn79gh039l5kszg3rjxs9z4nid-1password-cli-2.34.0.drv",
+      "description": "1Password command-line tool",
+      "install_id": "_1password-cli",
+      "license": "Unfree",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "1password-cli-2.34.0",
+      "pname": "_1password-cli",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:18.474295Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "2.34.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/b9nf82xfb87bgs5cswfnqkwsj9fnrq6g-1password-cli-2.34.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "_1password-cli",
+      "broken": false,
+      "derivation": "/nix/store/hjggjmrdvclvab2q8zcy20csjwbix759-1password-cli-2.34.0.drv",
+      "description": "1Password command-line tool",
+      "install_id": "_1password-cli",
+      "license": "Unfree",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "1password-cli-2.34.0",
+      "pname": "_1password-cli",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:50.585415Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "2.34.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/jcx4qs5qrw9213a1rgvsz714pfggms01-1password-cli-2.34.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "_1password-cli",
+      "broken": false,
+      "derivation": "/nix/store/w37ww0g0g33wvijcf0m6nqcyvhk1xd0a-1password-cli-2.34.0.drv",
+      "description": "1Password command-line tool",
+      "install_id": "_1password-cli",
+      "license": "Unfree",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "1password-cli-2.34.0",
+      "pname": "_1password-cli",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:43.313773Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "2.34.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/mbpngv91pvjrkvhhaacqifah7q97lwrp-1password-cli-2.34.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "_1password-cli",
+      "broken": false,
+      "derivation": "/nix/store/x6qyazj7n2ya8135fv3rcbsg98lx766v-1password-cli-2.34.0.drv",
+      "description": "1Password command-line tool",
+      "install_id": "_1password-cli",
+      "license": "Unfree",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "1password-cli-2.34.0",
+      "pname": "_1password-cli",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:14.149422Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "2.34.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/k9ca6pr9p3yyfyf87rlqjfwgji7h1hzb-1password-cli-2.34.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "doctl",
+      "broken": false,
+      "derivation": "/nix/store/19hipg39rjdr4f8yba6l3xws5vbnw17b-doctl-1.160.1.drv",
+      "description": "Command line tool for DigitalOcean services",
+      "install_id": "doctl",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "doctl-1.160.1",
+      "pname": "doctl",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:19.387712Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.160.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ggpcjfwlrr9v30lb444v7cbfxfrpbi3f-doctl-1.160.1"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "doctl",
+      "broken": false,
+      "derivation": "/nix/store/yrz0z01bjg4m6z6qsh4q79d12cabsrwp-doctl-1.160.1.drv",
+      "description": "Command line tool for DigitalOcean services",
+      "install_id": "doctl",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "doctl-1.160.1",
+      "pname": "doctl",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:51.635667Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.160.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/afxh3ki8l3qi957szji8sxbr250xkbxn-doctl-1.160.1"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "doctl",
+      "broken": false,
+      "derivation": "/nix/store/1r01frlr7di7q19d2zfrp2kd1dhpac32-doctl-1.160.1.drv",
+      "description": "Command line tool for DigitalOcean services",
+      "install_id": "doctl",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "doctl-1.160.1",
+      "pname": "doctl",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.120900Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.160.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/2xwv2x56h4l1fvcryvci9ka408jgirgv-doctl-1.160.1"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "doctl",
+      "broken": false,
+      "derivation": "/nix/store/p7h73116pglsaij5pnxgd8ymdy4rz9fn-doctl-1.160.1.drv",
+      "description": "Command line tool for DigitalOcean services",
+      "install_id": "doctl",
+      "license": "Apache-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "doctl-1.160.1",
+      "pname": "doctl",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:15.312592Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.160.1",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ncny8m2yylzgjb0i0sa2966s9xv50axb-doctl-1.160.1"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh",
+      "broken": false,
+      "derivation": "/nix/store/shyqzsdzlaz0ay7wq22kmllqiiag5bk4-gh-2.93.0.drv",
+      "description": "GitHub CLI tool",
+      "install_id": "gh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-2.93.0",
+      "pname": "gh",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:19.986740Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.93.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/p7wwwbqc7s50l4z2jgk42hynw15cmwx6-gh-2.93.0"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh",
+      "broken": false,
+      "derivation": "/nix/store/0qz7p060qisqf97dghfi26h4ak4rkim1-gh-2.93.0.drv",
+      "description": "GitHub CLI tool",
+      "install_id": "gh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-2.93.0",
+      "pname": "gh",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:52.514771Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.93.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/1lc9qaiyrpyrk4l3r451msli62wa6im4-gh-2.93.0"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh",
+      "broken": false,
+      "derivation": "/nix/store/afv09j314j5byl2z0x3brz8bhys8h3cf-gh-2.93.0.drv",
+      "description": "GitHub CLI tool",
+      "install_id": "gh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-2.93.0",
+      "pname": "gh",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.715224Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.93.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/giwixml54fx65khz0dkwk1k6pa2rvdb4-gh-2.93.0"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "gh",
+      "broken": false,
+      "derivation": "/nix/store/g2ny647j4ipcy7qfmdvizw36avkzrwbh-gh-2.93.0.drv",
+      "description": "GitHub CLI tool",
+      "install_id": "gh",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "gh-2.93.0",
+      "pname": "gh",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:16.277324Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.93.0",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/fxvyz1dx5wp87qgbd6dfkmqqb4fypm3b-gh-2.93.0"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "go",
+      "broken": false,
+      "derivation": "/nix/store/3wcz439vgpp14pn7jmfnhj1gfjz16pfm-go-1.26.3.drv",
+      "description": "Go Programming language",
+      "install_id": "go",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "go-1.26.3",
+      "pname": "go",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:14:20.166513Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.26.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/7ycp8j45iay38g9mjaxmy4jhwdsrb47y-go-1.26.3"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "go",
+      "broken": false,
+      "derivation": "/nix/store/350ianh8b5f8pz5rb79f6hbjkzyglzn5-go-1.26.3.drv",
+      "description": "Go Programming language",
+      "install_id": "go",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "go-1.26.3",
+      "pname": "go",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:46:53.318519Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.26.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/jkcwcbwvhgzmxg59798z4clmj4bfv42i-go-1.26.3"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "go",
+      "broken": false,
+      "derivation": "/nix/store/7injq3dc4gh49fwhgh403kf7n1y6f9ci-go-1.26.3.drv",
+      "description": "Go Programming language",
+      "install_id": "go",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "go-1.26.3",
+      "pname": "go",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:17:44.930875Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.26.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/3f2jzvxmhhlarjqxy1p7i9r5l34siz29-go-1.26.3"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "go",
+      "broken": false,
+      "derivation": "/nix/store/zalhv7i71i9c3v7vm61psf2arglbzjfg-go-1.26.3.drv",
+      "description": "Go Programming language",
+      "install_id": "go",
+      "license": "BSD-3-Clause",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "go-1.26.3",
+      "pname": "go",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:53:17.136238Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "1.26.3",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/33fw5m31lfcnk4ff2f0df7j2bxnh8lgk-go-1.26.3"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "terraform",
+      "broken": false,
+      "derivation": "/nix/store/glnw1amlnlj0kpv67r90wsky04z1aa97-terraform-1.15.5.drv",
+      "description": "Tool for building, changing, and versioning infrastructure",
+      "install_id": "terraform",
+      "license": "BUSL-1.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "terraform-1.15.5",
+      "pname": "terraform",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:16:24.365781Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "1.15.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/pvvcwf3pvc60iyfzml81slw2w63m7zzc-terraform-1.15.5"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "terraform",
+      "broken": false,
+      "derivation": "/nix/store/fsxh28j42f8jkcz4d0gi4fmbbfixzim9-terraform-1.15.5.drv",
+      "description": "Tool for building, changing, and versioning infrastructure",
+      "install_id": "terraform",
+      "license": "BUSL-1.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "terraform-1.15.5",
+      "pname": "terraform",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T03:49:28.939475Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "1.15.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/i01dx60xpnab1q6mv7zaqwg9dq7vf148-terraform-1.15.5"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "terraform",
+      "broken": false,
+      "derivation": "/nix/store/xsyaqvn970pjdbapfdpf13p6qvrwp4fl-terraform-1.15.5.drv",
+      "description": "Tool for building, changing, and versioning infrastructure",
+      "install_id": "terraform",
+      "license": "BUSL-1.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "terraform-1.15.5",
+      "pname": "terraform",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:19:39.607148Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "1.15.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/kx6kccjgaw7ky07vxk3wbp8hq7m3ap93-terraform-1.15.5"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "terraform",
+      "broken": false,
+      "derivation": "/nix/store/n9nig7iscipbdfn9nwfi3wri8xyaki90-terraform-1.15.5.drv",
+      "description": "Tool for building, changing, and versioning infrastructure",
+      "install_id": "terraform",
+      "license": "BUSL-1.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "name": "terraform-1.15.5",
+      "pname": "terraform",
+      "rev": "a799d3e3886da994fa307f817a6bc705ae538eeb",
+      "rev_count": 1011622,
+      "rev_date": "2026-06-06T12:30:50Z",
+      "scrape_date": "2026-06-08T04:56:08.489632Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": true,
+      "version": "1.15.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/z0h2f46j46bfjf52yahlwrm866z5xd74-terraform-1.15.5"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}

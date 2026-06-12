@@ -1,0 +1,29 @@
+name: debravinh-com
+region: sfo
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+
+domains:
+  - domain: debravinh.com
+    type: PRIMARY
+    zone: debravinh.com
+  - domain: www.debravinh.com
+    type: ALIAS
+    zone: debravinh.com
+
+services:
+  - name: sudovinh-debravinh
+    github:
+      repo: sudovinh/debravinh
+      branch: main
+      deploy_on_push: false
+    dockerfile_path: Dockerfile
+    http_port: 8080
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    health_check:
+      http_path: /
+      initial_delay_seconds: 10
+      period_seconds: 30

@@ -1,0 +1,67 @@
+name: PR Preview
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    name: Deploy preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Deploy preview app
+        id: deploy
+        uses: digitalocean/app_action/deploy@cc55bc9b848d25f9c1c9f831cf843fbab3fbfb15 # v2
+        with:
+          deploy_pr_preview: "true"
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Comment preview URL on PR
+        if: success()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Preview deployed: ${{ fromJson(steps.deploy.outputs.app).live_url }}`
+            })
+
+      - name: Comment failure details on PR
+        if: failure()
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          BUILD_LOGS: ${{ steps.deploy.outputs.build_logs }}
+          DEPLOY_LOGS: ${{ steps.deploy.outputs.deploy_logs }}
+        with:
+          script: |
+            const { BUILD_LOGS, DEPLOY_LOGS } = process.env
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `❌ Preview deploy failed. [View run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            <details><summary>Build logs</summary>
+
+            \`\`\`
+            ${BUILD_LOGS}
+            \`\`\`
+
+            </details>
+            <details><summary>Deploy logs</summary>
+
+            \`\`\`
+            ${DEPLOY_LOGS}
+            \`\`\`
+
+            </details>`
+            })
