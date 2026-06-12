@@ -1,0 +1,22 @@
+name: debravinh-com
+region: nyc
+
+domains:
+  - domain: debravinh.com
+    type: PRIMARY
+    zone: debravinh.com
+
+services:
+  - name: web
+    github:
+      repo: sudovinh/debravinh
+      branch: main
+      deploy_on_push: false
+    dockerfile_path: Dockerfile
+    http_port: 8080
+    instance_size_slug: apps-s-1vcpu-0.5gb
+    instance_count: 1
+    health_check:
+      http_path: /
+      initial_delay_seconds: 10
+      period_seconds: 30
