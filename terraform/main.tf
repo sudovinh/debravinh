@@ -14,7 +14,15 @@ provider "digitalocean" {
 resource "digitalocean_app" "debravinh_web" {
   spec {
     name   = "debravinh-com"
-    region = "nyc"
+    region = "sfo"
+
+    alert {
+      rule = "DEPLOYMENT_FAILED"
+    }
+
+    alert {
+      rule = "DOMAIN_FAILED"
+    }
 
     domain {
       name = "debravinh.com"
@@ -23,9 +31,9 @@ resource "digitalocean_app" "debravinh_web" {
     }
 
     service {
-      name               = "web"
+      name               = "sudovinh-debravinh"
       instance_count     = 1
-      instance_size_slug = "apps-s-1vcpu-0.5gb"
+      instance_size_slug = "basic-xxs"
 
       github {
         repo           = "sudovinh/debravinh"
@@ -49,6 +57,17 @@ resource "digitalocean_app" "debravinh_web" {
 # DNS zone for debravinh.com lives in DigitalOcean and points at the app.
 resource "digitalocean_domain" "debravinh" {
   name = "debravinh.com"
+}
+
+# Existing resources are imported into state, not recreated.
+import {
+  to = digitalocean_app.debravinh_web
+  id = "90e1359d-4e42-47a0-817c-63a83df75eb5"
+}
+
+import {
+  to = digitalocean_domain.debravinh
+  id = "debravinh.com"
 }
 
 output "app_url" {

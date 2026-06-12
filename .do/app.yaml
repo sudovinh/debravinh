@@ -1,5 +1,9 @@
 name: debravinh-com
-region: nyc
+region: sfo
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
 
 domains:
   - domain: debravinh.com
@@ -7,14 +11,14 @@ domains:
     zone: debravinh.com
 
 services:
-  - name: web
+  - name: sudovinh-debravinh
     github:
       repo: sudovinh/debravinh
       branch: main
       deploy_on_push: false
     dockerfile_path: Dockerfile
     http_port: 8080
-    instance_size_slug: apps-s-1vcpu-0.5gb
+    instance_size_slug: basic-xxs
     instance_count: 1
     health_check:
       http_path: /
