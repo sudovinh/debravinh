@@ -1,18 +1,21 @@
 /* debravinh.com — shared stylesheet for the landing and About Us pages. */
 
 :root {
-  --color-bg-deep: #1f1135;
-  --color-bg-mid: #5b2a86;
-  --color-bg-warm: #d4577b;
-  --color-text: #fdf7ff;
-  --color-text-soft: rgba(253, 247, 255, 0.72);
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-bg-hover: rgba(255, 255, 255, 0.16);
-  --glass-border: rgba(255, 255, 255, 0.18);
+  --color-bg-deep: #0a1628;
+  --color-bg-mid: #16365c;
+  --color-accent: #a8c5e0;
+  --color-accent-ice: #dbe9f7;
+  --color-text: #f4f8fc;
+  --color-text-soft: rgba(244, 248, 252, 0.72);
+  --glass-bg: rgba(216, 233, 250, 0.07);
+  --glass-bg-hover: rgba(216, 233, 250, 0.14);
+  --glass-border: rgba(216, 233, 250, 0.18);
+  --font-body: "Karla", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
   --radius-card: 24px;
   --radius-pill: 999px;
-  --shadow-card: 0 24px 60px rgba(15, 6, 32, 0.45);
-  --shadow-lift: 0 10px 24px rgba(15, 6, 32, 0.35);
+  --shadow-card: 0 24px 60px rgba(3, 10, 22, 0.5);
+  --shadow-lift: 0 10px 24px rgba(3, 10, 22, 0.4);
 }
 
 * {
@@ -32,9 +35,9 @@ body {
   justify-content: center;
   gap: 1.5rem;
   padding: 2rem 1.25rem;
-  font-family: "Karla", "Segoe UI", system-ui, sans-serif;
+  font-family: var(--font-body);
   color: var(--color-text);
-  background: linear-gradient(160deg, var(--color-bg-deep) 0%, var(--color-bg-mid) 55%, var(--color-bg-warm) 120%) fixed;
+  background: linear-gradient(165deg, var(--color-bg-deep) 0%, var(--color-bg-mid) 70%, #2c5282 130%) fixed;
 }
 
 /* Soft ambient glow behind the card for depth. */
@@ -44,8 +47,8 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(40rem 28rem at 18% 12%, rgba(212, 87, 123, 0.28), transparent 60%),
-    radial-gradient(34rem 26rem at 85% 80%, rgba(91, 42, 134, 0.5), transparent 65%);
+    radial-gradient(40rem 28rem at 18% 12%, rgba(168, 197, 224, 0.14), transparent 60%),
+    radial-gradient(34rem 26rem at 85% 80%, rgba(44, 82, 130, 0.45), transparent 65%);
 }
 
 /* ── Glass card ──────────────────────────────────────────────────────────── */
@@ -91,13 +94,14 @@ body::before {
 .avatar:hover,
 .avatar:focus-visible {
   transform: scale(1.04);
-  border-color: var(--color-bg-warm);
+  border-color: var(--color-accent);
 }
 
 h1 {
   margin: 1.25rem 0 1.75rem;
-  font-size: clamp(1.9rem, 6vw, 2.5rem);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6.5vw, 2.9rem);
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
@@ -175,7 +179,7 @@ footer {
 /* ── Focus & motion preferences ──────────────────────────────────────────── */
 
 a:focus-visible {
-  outline: 2px solid var(--color-bg-warm);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -198,12 +202,23 @@ a:focus-visible {
 }
 
 .about .hero-photo {
-  width: 100%;
-  max-height: 340px;
+  display: block;
+  width: min(100%, 420px);
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: 50% 32%;
   border-radius: calc(var(--radius-card) - 8px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-lift);
+}
+
+.about .intro {
+  margin: 1.75rem 0 0;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--color-text);
 }
 
 .about section {
@@ -212,9 +227,11 @@ a:focus-visible {
 
 .about h2 {
   margin: 0 0 0.5rem;
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
   letter-spacing: 0.02em;
-  color: #f8c9d8;
+  color: var(--color-accent);
 }
 
 .about p {
@@ -239,5 +256,5 @@ a:focus-visible {
 
 .back-link:hover,
 .back-link:focus-visible {
-  border-color: var(--color-bg-warm);
+  border-color: var(--color-accent);
 }
