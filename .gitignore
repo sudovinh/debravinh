@@ -23,3 +23,10 @@ go.work
 # others
 .DS_Store
 server.log
+bin/
+
+# terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.tfstate.lock.info
