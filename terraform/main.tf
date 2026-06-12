@@ -30,6 +30,12 @@ resource "digitalocean_app" "debravinh_web" {
       zone = "debravinh.com"
     }
 
+    domain {
+      name = "www.debravinh.com"
+      type = "ALIAS"
+      zone = "debravinh.com"
+    }
+
     service {
       name               = "sudovinh-debravinh"
       instance_count     = 1

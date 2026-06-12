@@ -9,6 +9,9 @@ domains:
   - domain: debravinh.com
     type: PRIMARY
     zone: debravinh.com
+  - domain: www.debravinh.com
+    type: ALIAS
+    zone: debravinh.com
 
 services:
   - name: sudovinh-debravinh
