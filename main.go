@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -17,6 +18,11 @@ import (
 
 //go:embed web/views web/assets web/robots.txt
 var webFS embed.FS
+
+var redirectMap = map[string]string{
+	"/levi": "https://digital.fidelity.com/prgw/digital/familygifting/mlgLandingPage?uuid=0ec1277a30464ccbbc25f69b04ca429a",
+	// Add more redirects as needed
+}
 
 // contentSecurityPolicy allows same-origin content plus Google Fonts; the site has no JavaScript.
 const contentSecurityPolicy = "default-src 'self'; style-src 'self' fonts.googleapis.com; font-src fonts.gstatic.com; img-src 'self'; script-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
@@ -29,6 +35,20 @@ func newServer() *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
+	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+		// JPEGs are already compressed; gzipping them wastes CPU for nothing.
+		Skipper: func(c echo.Context) bool {
+			return strings.HasPrefix(c.Request().URL.Path, "/assets/imgs/")
+		},
+	}))
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			if strings.HasPrefix(c.Request().URL.Path, "/assets/") {
+				c.Response().Header().Set("Cache-Control", "public, max-age=86400")
+			}
+			return next(c)
+		}
+	})
 	e.Use(middleware.SecureWithConfig(middleware.SecureConfig{
 		XSSProtection:         "0", // deprecated header; CSP supersedes it
 		ContentTypeNosniff:    "nosniff",
@@ -56,6 +76,12 @@ func newServer() *echo.Echo {
 
 	e.StaticFS("/assets", echo.MustSubFS(webFS, "web/assets"))
 	e.FileFS("/robots.txt", "web/robots.txt", webFS)
+
+	for path, redirectURL := range redirectMap {
+		e.GET(path, func(c echo.Context) error {
+			return c.Redirect(http.StatusTemporaryRedirect, redirectURL)
+		})
+	}
 
 	// Send unknown paths back to the landing page instead of a bare 404.
 	e.HTTPErrorHandler = func(err error, c echo.Context) {

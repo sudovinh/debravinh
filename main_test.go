@@ -22,6 +22,7 @@ func TestRoutes(t *testing.T) {
 		{name: "home page", path: "/", wantStatus: http.StatusOK, wantBody: "Debra"},
 		{name: "about us page", path: "/aboutus", wantStatus: http.StatusOK, wantBody: "Debra"},
 		{name: "old wedding path redirects home", path: "/wedding", wantStatus: http.StatusTemporaryRedirect, wantLocation: "/"},
+		{name: "levi redirects to 529 gifting", path: "/levi", wantStatus: http.StatusTemporaryRedirect, wantLocation: "https://digital.fidelity.com/prgw/digital/familygifting/mlgLandingPage?uuid=0ec1277a30464ccbbc25f69b04ca429a"},
 		{name: "robots.txt", path: "/robots.txt", wantStatus: http.StatusOK, wantBody: "User-agent"},
 		{name: "static asset", path: "/assets/css/style.css", wantStatus: http.StatusOK},
 		{name: "unknown path redirects home", path: "/nonexistent", wantStatus: http.StatusTemporaryRedirect, wantLocation: "/"},
@@ -82,5 +83,38 @@ func TestSecurityHeaders(t *testing.T) {
 
 	if got := rec.Header().Get("Permissions-Policy"); got == "" {
 		t.Error("Permissions-Policy header is missing")
+	}
+}
+
+func TestAssetCaching(t *testing.T) {
+	e := newServer()
+
+	req := httptest.NewRequest(http.MethodGet, "/assets/css/style.css", nil)
+	rec := httptest.NewRecorder()
+	e.ServeHTTP(rec, req)
+
+	if got := rec.Header().Get("Cache-Control"); !strings.Contains(got, "max-age") {
+		t.Errorf("Cache-Control on asset = %q, want a max-age directive", got)
+	}
+
+	req = httptest.NewRequest(http.MethodGet, "/", nil)
+	rec = httptest.NewRecorder()
+	e.ServeHTTP(rec, req)
+
+	if got := rec.Header().Get("Cache-Control"); strings.Contains(got, "max-age=86400") {
+		t.Errorf("Cache-Control on page = %q, pages should not be cached like assets", got)
+	}
+}
+
+func TestGzipCompression(t *testing.T) {
+	e := newServer()
+
+	req := httptest.NewRequest(http.MethodGet, "/", nil)
+	req.Header.Set("Accept-Encoding", "gzip")
+	rec := httptest.NewRecorder()
+	e.ServeHTTP(rec, req)
+
+	if got := rec.Header().Get("Content-Encoding"); got != "gzip" {
+		t.Errorf("Content-Encoding = %q, want gzip", got)
 	}
 }
