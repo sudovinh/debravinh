@@ -14,6 +14,20 @@ Types of changes
 `Security` in case of vulnerabilities.
 
 
+## [2026-06-11]
+
+### Changed
+- full site overhaul: new glass card design, echo v4, assets embedded in the binary
+- ci/cd moved off docker hub — digitalocean now builds from source via app_action v2
+- security headers, seo/social tags, accessibility fixes
+
+### Added
+- /aboutus page
+- pr preview deploys, terraform for the do app + domain, flox dev environment
+
+### Removed
+- /wedding redirect and the old wedding hashtag (the wedding happened!)
+
 ## [2023-09-27]
 
 ### Changed
