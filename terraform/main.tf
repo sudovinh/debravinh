@@ -60,7 +60,10 @@ resource "digitalocean_app" "debravinh_web" {
   }
 }
 
-# DNS zone for debravinh.com lives in DigitalOcean and points at the app.
+# Zone SHELL only. All DNS records in this zone (MX, DKIM, TXT, and the mirrored
+# app-attachment records) are owned by the hall-of-records repo (octoDNS) — do not
+# add digitalocean_record resources here. The domain{} blocks above are the one
+# exception: App Platform writes the www CNAME + apex A/AAAA from them.
 resource "digitalocean_domain" "debravinh" {
   name = "debravinh.com"
 }
