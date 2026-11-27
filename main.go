@@ -30,6 +30,10 @@ const contentSecurityPolicy = "default-src 'self'; style-src 'self' fonts.google
 // newServer builds the Echo instance with all middleware and routes registered.
 func newServer() *echo.Echo {
 	e := echo.New()
+	// Only reachable through the App Platform proxy, which sets X-Forwarded-Proto.
+	// Echo >= 4.16 ignores that header unless the peer is a private IP, which the
+	// proxy's isn't, so the Secure middleware would silently drop HSTS.
+	e.SchemeExtractor = echo.LegacySchemeExtractor()
 	e.HideBanner = true
 
 	e.Use(middleware.Logger())
