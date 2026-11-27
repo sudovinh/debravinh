@@ -56,6 +56,9 @@ func TestSecurityHeaders(t *testing.T) {
 	// Simulate the TLS-terminating proxy in front of the app (DigitalOcean App
 	// Platform); HSTS is only sent on HTTPS requests, as the spec requires.
 	req.Header.Set(echo.HeaderXForwardedProto, "https")
+	// Echo >= 4.16 only trusts X-Forwarded-Proto from private/loopback peers;
+	// the App Platform proxy connects from its internal network.
+	req.RemoteAddr = "10.0.0.1:12345"
 	rec := httptest.NewRecorder()
 	e.ServeHTTP(rec, req)
 
