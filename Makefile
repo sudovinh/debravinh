@@ -60,7 +60,7 @@ clean:
 # ── Terraform ─────────────────────────────────────────────────────────────────
 
 terraform-init:
-	cd terraform && terraform init
+	cd terraform && $(OP_TF) terraform init
 
 terraform-plan:
 	cd terraform && $(OP_TF) terraform plan
