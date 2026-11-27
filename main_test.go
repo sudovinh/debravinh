@@ -56,9 +56,6 @@ func TestSecurityHeaders(t *testing.T) {
 	// Simulate the TLS-terminating proxy in front of the app (DigitalOcean App
 	// Platform); HSTS is only sent on HTTPS requests, as the spec requires.
 	req.Header.Set(echo.HeaderXForwardedProto, "https")
-	// Echo >= 4.16 only trusts X-Forwarded-Proto from private/loopback peers;
-	// the App Platform proxy connects from its internal network.
-	req.RemoteAddr = "10.0.0.1:12345"
 	rec := httptest.NewRecorder()
 	e.ServeHTTP(rec, req)
 
@@ -119,5 +116,18 @@ func TestGzipCompression(t *testing.T) {
 
 	if got := rec.Header().Get("Content-Encoding"); got != "gzip" {
 		t.Errorf("Content-Encoding = %q, want gzip", got)
+	}
+}
+
+// Uptime checks and link previews send HEAD; Echo doesn't route it to GET.
+func TestHeadRequests(t *testing.T) {
+	h := headAsGet(newServer())
+	for _, path := range []string{"/", "/aboutus", "/robots.txt"} {
+		req := httptest.NewRequest(http.MethodHead, path, nil)
+		rec := httptest.NewRecorder()
+		h.ServeHTTP(rec, req)
+		if rec.Code != http.StatusOK {
+			t.Errorf("HEAD %s = %d, want %d", path, rec.Code, http.StatusOK)
+		}
 	}
 }

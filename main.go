@@ -30,6 +30,10 @@ const contentSecurityPolicy = "default-src 'self'; style-src 'self' fonts.google
 // newServer builds the Echo instance with all middleware and routes registered.
 func newServer() *echo.Echo {
 	e := echo.New()
+	// Only reachable through the App Platform proxy, which sets X-Forwarded-Proto.
+	// Echo >= 4.16 ignores that header unless the peer is a private IP, which the
+	// proxy's isn't, so the Secure middleware would silently drop HSTS.
+	e.SchemeExtractor = echo.LegacySchemeExtractor()
 	e.HideBanner = true
 
 	e.Use(middleware.Logger())
@@ -113,16 +117,22 @@ func main() {
 	}
 
 	e := newServer()
-	e.Server.ReadTimeout = 10 * time.Second
-	e.Server.ReadHeaderTimeout = 5 * time.Second
-	e.Server.WriteTimeout = 10 * time.Second
-	e.Server.IdleTimeout = 60 * time.Second
+	// Own http.Server: e.Start would install e itself as the handler,
+	// bypassing headAsGet.
+	srv := &http.Server{
+		Addr:              ":" + port,
+		Handler:           headAsGet(e),
+		ReadTimeout:       10 * time.Second,
+		ReadHeaderTimeout: 5 * time.Second,
+		WriteTimeout:      10 * time.Second,
+		IdleTimeout:       60 * time.Second,
+	}
 
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
 
 	go func() {
-		if err := e.Start(":" + port); err != nil && !errors.Is(err, http.ErrServerClosed) {
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			e.Logger.Fatal(err)
 		}
 	}()
@@ -130,7 +140,20 @@ func main() {
 	<-ctx.Done()
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	if err := e.Shutdown(shutdownCtx); err != nil {
+	if err := srv.Shutdown(shutdownCtx); err != nil {
 		e.Logger.Fatal(err)
 	}
+}
+
+// headAsGet answers HEAD like GET. Echo only routes registered methods, so
+// uptime checks and link previews got 404/405. Echo routes a GET copy of the
+// request; w still belongs to the HEAD request, so net/http drops the body.
+func headAsGet(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodHead {
+			r = r.Clone(r.Context())
+			r.Method = http.MethodGet
+		}
+		h.ServeHTTP(w, r)
+	})
 }
