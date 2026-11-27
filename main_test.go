@@ -118,3 +118,16 @@ func TestGzipCompression(t *testing.T) {
 		t.Errorf("Content-Encoding = %q, want gzip", got)
 	}
 }
+
+// Uptime checks and link previews send HEAD; Echo doesn't route it to GET.
+func TestHeadRequests(t *testing.T) {
+	h := headAsGet(newServer())
+	for _, path := range []string{"/", "/aboutus", "/robots.txt"} {
+		req := httptest.NewRequest(http.MethodHead, path, nil)
+		rec := httptest.NewRecorder()
+		h.ServeHTTP(rec, req)
+		if rec.Code != http.StatusOK {
+			t.Errorf("HEAD %s = %d, want %d", path, rec.Code, http.StatusOK)
+		}
+	}
+}
