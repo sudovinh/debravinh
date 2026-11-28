@@ -19,7 +19,7 @@ Tooling comes from Flox (`flox activate`, manifest committed in `.flox/`).
 - `make check` — vet + test + build (run before pushing)
 - `make vuln` — govulncheck scan
 - `make docker-build` / `make docker-run`
-- `make terraform-plan` / `make terraform-apply` — uses `op run` with `terraform/.env.terraform` (needs a signed-in 1Password CLI)
+- `make terraform-plan` / `make terraform-apply` — uses `op run` with `terraform/.env.terraform` (needs a signed-in 1Password CLI). Runs `tofu`: state is OpenTofu-encrypted, `terraform` can't read it
 
 ## Deployment
 

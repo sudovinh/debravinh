@@ -7,7 +7,7 @@ OP_TF = op run --env-file=.env.terraform --
 install-prereq-flox:
 	@which flox > /dev/null || (echo "ERROR: Flox not found. Install from https://flox.dev" && exit 1)
 	@echo "Installing prerequisites via Flox..."
-	flox install go terraform doctl _1password-cli gh
+	flox install go opentofu doctl _1password-cli gh
 	@which docker > /dev/null && echo "✓ Docker already installed" || echo "⚠ Docker not found — install Docker Desktop from https://www.docker.com/products/docker-desktop"
 	@echo ""
 	@$(MAKE) check-prereq
@@ -16,7 +16,7 @@ check-prereq:
 	@echo "Checking prerequisites..."
 	@which go > /dev/null && echo "✓ Go        $(shell go version)" || echo "✗ Go        not found — run: make install-prereq-flox"
 	@which op > /dev/null && echo "✓ op CLI    $(shell op --version)" || echo "✗ op CLI    not found — run: make install-prereq-flox"
-	@which terraform > /dev/null && echo "✓ Terraform $(shell terraform --version | head -1)" || echo "✗ Terraform not found — run: make install-prereq-flox"
+	@which tofu > /dev/null && echo "✓ OpenTofu  $(shell tofu --version | head -1)" || echo "✗ OpenTofu  not found — run: make install-prereq-flox"
 	@which doctl > /dev/null && echo "✓ doctl     $(shell doctl version | head -1)" || echo "✗ doctl     not found — run: make install-prereq-flox"
 	@which gh > /dev/null && echo "✓ gh CLI    $(shell gh --version | head -1)" || echo "✗ gh CLI    not found — run: make install-prereq-flox"
 	@which docker > /dev/null && echo "✓ Docker    $(shell docker --version)" || echo "✗ Docker    not found — https://www.docker.com/products/docker-desktop"
@@ -60,14 +60,14 @@ clean:
 # ── Terraform ─────────────────────────────────────────────────────────────────
 
 terraform-init:
-	cd terraform && $(OP_TF) terraform init
+	cd terraform && $(OP_TF) tofu init
 
 terraform-plan:
-	cd terraform && $(OP_TF) terraform plan
+	cd terraform && $(OP_TF) tofu plan
 
 terraform-apply:
-	cd terraform && $(OP_TF) terraform apply
+	cd terraform && $(OP_TF) tofu apply
 
 terraform-destroy:
 	@echo "⚠ Destroying the DO app and domain — are you sure?"
-	cd terraform && $(OP_TF) terraform destroy
+	cd terraform && $(OP_TF) tofu destroy

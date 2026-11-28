@@ -10,12 +10,12 @@ Source for [debravinh.com](https://debravinh.com) — a linktree-style landing p
 - **Go + [Echo v4](https://echo.labstack.com/)** — single-file server, both pages and all assets are compiled in via `go:embed` (no filesystem reads at runtime)
 - **Plain HTML/CSS** — no JS frameworks, inline SVG icons, one shared stylesheet
 - **DigitalOcean App Platform** — builds from the repo `Dockerfile`, spec lives in [`.do/app.yaml`](.do/app.yaml)
-- **Terraform** — manages the DO app and the `debravinh.com` domain ([`terraform/`](terraform/))
+- **OpenTofu** — manages the DO app and the `debravinh.com` domain ([`terraform/`](terraform/))
 - **GitHub Actions** — CI, PR preview deploys, and production deploys
 
 ## Local development
 
-Tooling is managed with [Flox](https://flox.dev) (`flox activate` drops you into a shell with go, terraform, doctl, op, and gh). Or bring your own Go ≥ 1.26.
+Tooling is managed with [Flox](https://flox.dev) (`flox activate` drops you into a shell with go, tofu, doctl, op, and gh). Or bring your own Go ≥ 1.26.
 
 ```shell
 make run          # start the server on :8080 (PORT env var to override)
@@ -53,3 +53,5 @@ make terraform-init
 make terraform-plan
 make terraform-apply
 ```
+
+State is remote (DO Spaces, `sv-terraform-root`) and encrypted client-side with OpenTofu, so use `tofu`, not `terraform`. The passphrase is `op://r4botie4jmy4iitgejz2uwabay/debravinh-tofu-state/password`; lose it and the state is unreadable. To rotate, re-encrypt first (OpenTofu `fallback` on the old key), never edit 1Password alone.
