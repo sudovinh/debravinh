@@ -9,9 +9,9 @@ schema-version = "1.12.0"
 [install]
 doctl.pkg-path = "doctl"
 go.pkg-path = "go"
-terraform.pkg-path = "terraform"
 gh.pkg-path = "gh"
 _1password-cli.pkg-path = "_1password-cli"
+opentofu.pkg-path = "opentofu"
 # gum.pkg-path = "gum"
 # gum.version = "^0.14.5"
 
